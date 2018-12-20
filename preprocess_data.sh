@@ -5,10 +5,9 @@ OUTDIR=$3
 mkdir -p $OUTDIR
 
 # trim adapter using cut adapt
-#cutadapt  -A AGATCGGAAGAGC  -a AGATCGGAAGAGC \
-#           --cores 20 \
-#           -o $OUTDIR/"$SAMPLEID"_1_sequence.cutadapt.txt.gz -p $OUTDIR/"$SAMPLEID"_2_sequence.cutadapt.txt.gz \
-#          $INDIR/"$SAMPLEID"_1_sequence.txt.gz $INDIR/"$SAMPLEID"_2_sequence.txt.gz
+cutadapt  -A AGATCGGAAGAGC  -a AGATCGGAAGAGC \
+          -o $OUTDIR/"$SAMPLEID"_1_sequence.cutadapt.txt.gz -p $OUTDIR/"$SAMPLEID"_2_sequence.cutadapt.txt.gz \
+          $INDIR/"$SAMPLEID"_1_sequence.txt.gz $INDIR/"$SAMPLEID"_2_sequence.txt.gz
           
 mkdir -p $OUTDIR/paired $OUTDIR/unpaired
 
