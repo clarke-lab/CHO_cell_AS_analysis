@@ -1,4 +1,4 @@
-# alt_splicing_analysis
+# alt_splicing_analysis - this is a change test
 
 ## Prerequisites 
 Trimmomatic [modify the code to add to path]
