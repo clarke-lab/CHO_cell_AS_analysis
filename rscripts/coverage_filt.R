@@ -1,3 +1,4 @@
+#!/usr/bin/Rscript
 coverage_filt<-function(rmats_data_frame){
   merged_counts<-paste(rmats_data_frame$IJC_SAMPLE_1,
                        rmats_data_frame$SJC_SAMPLE_1,

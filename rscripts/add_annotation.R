@@ -1,8 +1,9 @@
+#!/usr/bin/Rscript
 add_annotation<-function(rmats_data_frame, event){
 
-  chok1_entrez<-readLines("chok1_ncbi_ids.txt")
+  chok1_entrez<-readLines("reference_genome/chok1_ncbi_ids.txt")
 
-  library(biomaRt)
+  suppressMessages(library(biomaRt))
   ensembl=useMart("ensembl")
   ensembl = useDataset("ccrigri_gene_ensembl",mart=ensembl)
   filters = listFilters(ensembl)
@@ -75,7 +76,7 @@ add_annotation<-function(rmats_data_frame, event){
   }
 
   if (is.na(annotations[i,3])){
-    annotations[i,3] <-str_split(chok1_entrez[grep(annotations[i,2],chok1_entrez, fixed=T)], "\t")[[1]][3]
+    annotations[i,3] <-strsplit(chok1_entrez[grep(annotations[i,2],chok1_entrez, fixed=T)], "\t")[[1]][3]
   if (is.na(annotations[i,3])){annotations[i,2:6]<-"Unannotated"}
   }
  }
