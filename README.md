@@ -13,68 +13,97 @@ bash prepare_genome.sh
 ```
 
 #make the STAR index
-
 ```bash
 make_star_index.sh
 ```
 
-### data preprocessing
+
+### trim adapter sequences
 ```bash
-bash preprocess_data.sh total-rna-1 ../data/raw ../data/preprocessed
-bash preprocess_data.sh total-rna-2 ../data/raw ../data/preprocessed
-bash preprocess_data.sh total-rna-3 ../data/raw ../data/preprocessed
-bash preprocess_data.sh total-rna-4 ../data/raw ../data/preprocessed
-bash preprocess_data.sh total-rna-5 ../data/raw ../data/preprocessed
-bash preprocess_data.sh total-rna-6 ../data/raw ../data/preprocessed
-bash preprocess_data.sh total-rna-7 ../data/raw ../data/preprocessed
-bash preprocess_data.sh total-rna-8 ../data/raw ../data/preprocessed
+test
+bash trim_adapter.sh REP37_1 ../data/raw ../data/preprocessed/cutadapt& 
+bash trim_adapter.sh REP37_2 ../data/raw ../data/preprocessed/cutadapt& 
+bash trim_adapter.sh REP37_3 ../data/raw ../data/preprocessed/cutadapt& 
+bash trim_adapter.sh REP37_4 ../data/raw ../data/preprocessed/cutadapt& 
+bash trim_adapter.sh REP31_1 ../data/raw ../data/preprocessed/cutadapt& 
+bash trim_adapter.sh REP31_2 ../data/raw ../data/preprocessed/cutadapt& 
+bash trim_adapter.sh REP31_3 ../data/raw ../data/preprocessed/cutadapt& 
+bash trim_adapter.sh REP31_4 ../data/raw ../data/preprocessed/cutadapt 
 ```
 
-### data mapping
+### quality trimming
 ```bash
-bash preprocess_data.sh total-rna-1 ../data/preprocessed/paired
-bash preprocess_data.sh total-rna-2 ../data/preprocessed/paired
-bash preprocess_data.sh total-rna-3 ../data/preprocessed/paired
-bash preprocess_data.sh total-rna-4 ../data/preprocessed/paired
-bash preprocess_data.sh total-rna-5 ../data/preprocessed/paired
-bash preprocess_data.sh total-rna-6 ../data/preprocessed/paired
-bash preprocess_data.sh total-rna-7 ../data/preprocessed/paired
+bash trim_quality.sh REP37_1 ../data/preprocessed/cutadapt ../data/preprocessed
+bash trim_quality.sh REP37_2 ../data/preprocessed/cutadapt ../data/preprocessed
+bash trim_quality.sh REP37_3 ../data/preprocessed/cutadapt ../data/preprocessed
+bash trim_quality.sh REP37_4 ../data/preprocessed/cutadapt ../data/preprocessed
+bash trim_quality.sh REP31_1 ../data/preprocessed/cutadapt ../data/preprocessed
+bash trim_quality.sh REP31_2 ../data/preprocessed/cutadapt ../data/preprocessed
+bash trim_quality.sh REP31_3 ../data/preprocessed/cutadapt ../data/preprocessed
+bash trim_quality.sh REP31_4 ../data/preprocessed/cutadapt ../data/preprocessed
+```
+
+### map to CHOK1 genome
+```bash
+bash star_mapping.sh REP37_1  ../data/preprocessed/paired
+bash star_mapping.sh REP37_2  ../data/preprocessed/paired
+bash star_mapping.sh REP37_3  ../data/preprocessed/paired
+bash star_mapping.sh REP37_4  ../data/preprocessed/paired
+bash star_mapping.sh REP31_1  ../data/preprocessed/paired
+bash star_mapping.sh REP31_2  ../data/preprocessed/paired
+bash star_mapping.sh REP31_3  ../data/preprocessed/paired
+bash star_mapping.sh REP31_4  ../data/preprocessed/paired
 ```
 
 ### count for DESeq2
 ```bash
-bash htseq_count.sh total-rna-1 
-bash htseq_count.sh total-rna-2 
-bash htseq_count.sh total-rna-3 
-bash htseq_count.sh total-rna-4
-bash htseq_count.sh total-rna-5
-bash htseq_count.sh total-rna-6
-bash htseq_count.sh total-rna-7
+bash htseq_count.sh REP37_1 mapping reference_genome/ensembl_chok1_genome.gtf&
+bash htseq_count.sh REP37_2 mapping reference_genome/ensembl_chok1_genome.gtf&
+bash htseq_count.sh REP37_3 mapping reference_genome/ensembl_chok1_genome.gtf&
+bash htseq_count.sh REP37_4 mapping reference_genome/ensembl_chok1_genome.gtf&
+bash htseq_count.sh REP31_1 mapping reference_genome/ensembl_chok1_genome.gtf&
+bash htseq_count.sh REP31_2 mapping reference_genome/ensembl_chok1_genome.gtf&
+bash htseq_count.sh REP31_3 mapping reference_genome/ensembl_chok1_genome.gtf&
+bash htseq_count.sh REP31_4 mapping reference_genome/ensembl_chok1_genome.gtf
 ```
+
+### count for DESeq2
+```bash
+Rscript rscripts/run_deseq.R
+```
+
+
+
 
 ### string tie assembly
 ```bash
-bash stringtie_star.sh total-rna-1
-bash stringtie_star.sh total-rna-2 
-bash stringtie_star.sh total-rna-3 
-bash stringtie_star.sh total-rna-4 
-bash stringtie_star.sh total-rna-5
-bash stringtie_star.sh total-rna-6 
-bash stringtie_star.sh total-rna-7 
-bash stringtie_star.sh total-rna-8 
+bash stringtie_star.sh REP37_1 mapping reference_genome/ensembl_chok1_genome.gtf
+bash stringtie_star.sh REP37_2 mapping reference_genome/ensembl_chok1_genome.gtf
+bash stringtie_star.sh REP37_3 mapping reference_genome/ensembl_chok1_genome.gtf
+bash stringtie_star.sh REP37_4 mapping reference_genome/ensembl_chok1_genome.gtf
+bash stringtie_star.sh REP31_1 mapping reference_genome/ensembl_chok1_genome.gtf
+bash stringtie_star.sh REP31_2 mapping reference_genome/ensembl_chok1_genome.gtf
+bash stringtie_star.sh REP31_3 mapping reference_genome/ensembl_chok1_genome.gtf
+bash stringtie_star.sh REP31_4 mapping reference_genome/ensembl_chok1_genome.gtf
 ```
+
+### merge individual stringtie assemblies and compare to ENSEMBL annotation
+```bash
+bash stringtie_merge.sh stringtie_output reference_genome/ensembl_chok1_genome.gtf 
+```
+
 
 
 ### trim data for rMATs
 ```bash
-bash rmats_trim.sh total-rna-1
-bash rmats_trim.sh total-rna-2 
-bash rmats_trim.sh total-rna-3 
-bash rmats_trim.sh total-rna-4 
-bash rmats_trim.sh total-rna-5
-bash rmats_trim.sh total-rna-6 
-bash rmats_trim.sh total-rna-7 
-bash rmats_trim.sh total-rna-8
+bash rmats_trim.sh REP37_1  ../data/preprocessed/paired
+bash rmats_trim.sh REP37_2  ../data/preprocessed/paired
+bash rmats_trim.sh REP37_3  ../data/preprocessed/paired
+bash rmats_trim.sh REP37_4  ../data/preprocessed/paired
+bash rmats_trim.sh REP31_1  ../data/preprocessed/paired
+bash rmats_trim.sh REP31_2  ../data/preprocessed/paired
+bash rmats_trim.sh REP31_3  ../data/preprocessed/paired
+bash rmats_trim.sh REP31_4  ../data/preprocessed/paired
 ```
 
 
