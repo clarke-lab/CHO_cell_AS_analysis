@@ -1,5 +1,14 @@
 # alt_splicing_analysis
 
+These scripts replicate the results of the following manuscript
+
+## Installation
+
+### Dependancies 
+
+
+
+
 ## Prerequisites 
 Trimmomatic [modify the code to add to path]
 Cutadpat
@@ -20,7 +29,6 @@ make_star_index.sh
 
 ### trim adapter sequences
 ```bash
-test
 bash trim_adapter.sh REP37_1 ../data/raw ../data/preprocessed/cutadapt& 
 bash trim_adapter.sh REP37_2 ../data/raw ../data/preprocessed/cutadapt& 
 bash trim_adapter.sh REP37_3 ../data/raw ../data/preprocessed/cutadapt& 
@@ -69,7 +77,7 @@ bash htseq_count.sh REP31_4 mapping reference_genome/ensembl_chok1_genome.gtf
 
 ### count for DESeq2
 ```bash
-Rscript rscripts/run_deseq.R
+Rscript rscripts/run_deseq2.R
 ```
 
 
@@ -106,6 +114,27 @@ bash rmats_trim.sh REP31_3  ../data/preprocessed/paired
 bash rmats_trim.sh REP31_4  ../data/preprocessed/paired
 ```
 
+
+### filter and annotate the rmats results
+```bash
+Rscript rscripts/filter_rmats_results.R
+```
+
+bash rmats_run 
+
+```bash
+bash make_sashimi.sh input_bams.tsv stringtie_output/rmats_stringtie.gtf 47046 SE
+bash make_sashimi.sh input_bams.tsv stringtie_output/rmats_stringtie.gtf 12207 SE
+bash make_sashimi.sh input_bams.tsv stringtie_output/rmats_stringtie.gtf 23432 SE
+bash make_sashimi.sh input_bams.tsv stringtie_output/rmats_stringtie.gtf 6999  SE
+bash make_sashimi.sh input_bams.tsv stringtie_output/rmats_stringtie.gtf 50250 SE
+bash make_sashimi.sh input_bams.tsv stringtie_output/rmats_stringtie.gtf 21371 SE
+bash make_sashimi.sh input_bams.tsv stringtie_output/rmats_stringtie.gtf 11430 SE
+
+bash make_sashimi.sh input_bams.tsv stringtie_output/rmats_stringtie.gtf 1884 MXE
+bash make_sashimi.sh input_bams.tsv stringtie_output/rmats_stringtie.gtf 5617 MXE
+bash make_sashimi.sh input_bams.tsv stringtie_output/rmats_stringtie.gtf 3173 MXE
+```
 
 
 
