@@ -1,0 +1,8 @@
+REP311 sashimi_plots/bam_files/REP31_1.bam Endothelial
+REP312 sashimi_plots/bam_files/REP31_2.bam Endothelial
+REP313 sashimi_plots/bam_files/REP31_3.bam Endothelial
+REP314 sashimi_plots/bam_files/REP31_4.bam Endothelial
+REP371 sashimi_plots/bam_files/REP37_1.bam Epithelial
+REP372 sashimi_plots/bam_files/REP37_2.bam Epithelial
+REP373 sashimi_plots/bam_files/REP37_3.bam Epithelial
+REP374 sashimi_plots/bam_files/REP37_4.bam Epithelial
