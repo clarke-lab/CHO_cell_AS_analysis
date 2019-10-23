@@ -1,3 +1,0 @@
-#ff0000	red
-#0000ff	blue
-#000000	black
