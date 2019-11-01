@@ -1,0 +1,8 @@
+data
+differential_expression
+reference_genome
+rmats
+stringtie
+manuscript_plots/sashimi_plots
+manuscript_plots/read_counts
+manuscript_plots/rnaseqc
