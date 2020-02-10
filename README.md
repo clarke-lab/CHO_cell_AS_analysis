@@ -115,19 +115,3 @@ python ~/bin/rMATS.4.0.2/rMATS-turbo-Linux-UCS4/rmats.py \
 ```bash
 Rscript rscripts/filter_rmats_results.R
 ```
-
-bash rmats_run
-
-```bash
-bash make_sashimi.sh input_bams.tsv stringtie_output/rmats_stringtie.gtf 47046 SE
-bash make_sashimi.sh input_bams.tsv stringtie_output/rmats_stringtie.gtf 12207 SE
-bash make_sashimi.sh input_bams.tsv stringtie_output/rmats_stringtie.gtf 23432 SE
-bash make_sashimi.sh input_bams.tsv stringtie_output/rmats_stringtie.gtf 6999  SE
-bash make_sashimi.sh input_bams.tsv stringtie_output/rmats_stringtie.gtf 50250 SE
-bash make_sashimi.sh input_bams.tsv stringtie_output/rmats_stringtie.gtf 21371 SE
-bash make_sashimi.sh input_bams.tsv stringtie_output/rmats_stringtie.gtf 11430 SE
-
-bash make_sashimi.sh input_bams.tsv stringtie_output/rmats_stringtie.gtf 1884 MXE
-bash make_sashimi.sh input_bams.tsv stringtie_output/rmats_stringtie.gtf 5617 MXE
-bash make_sashimi.sh input_bams.tsv stringtie_output/rmats_stringtie.gtf 3173 MXE
-```
