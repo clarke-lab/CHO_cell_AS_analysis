@@ -5,17 +5,22 @@ These scripts replicate the results of the following manuscript
 ## Installation
 
 ### Dependancies
-
-just a test
-
-
-
-## Prerequisites
+sra-tools
 Trimmomatic [modify the code to add to path]
 Cutadpat
 STAR
-R
+R (>=3.5)
 Samtools
+
+### Download the raw RNASeq data from SRA
+mkdir -p data/sra
+mkdir -p data/tmp
+
+/mnt/HDD2/colin/bin/sratoolkit.2.10.4-ubuntu64/bin/fasterq-dump \
+SRR10572657 \
+-e 32 \
+-o data/sra \
+-t data/tmp
 
 ### get the ensembl CHOK1 genome and GTF
 ```bash
