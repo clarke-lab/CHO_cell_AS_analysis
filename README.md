@@ -1,38 +1,36 @@
 # alt_splicing_analysis
 
-These scripts replicate the results of the following manuscript
+## Introduction
+These scripts  enable the reproduction of the results presented in the following manuscript
 
-## Installation
+Tzani et al. Sub physiological temperature induces pervasive alternative splicing in Chinese hamster ovary cells
+
+The experimental design is as follows:
+
+Data availability:
 
 ### Dependancies
-sra-tools
 Trimmomatic [modify the code to add to path]
 Cutadpat
 STAR
 R (>=3.5)
+rMats.3.5.2
+stringtie 
 Samtools
 
-### Download the raw RNASeq data from SRA
-mkdir -p data/sra
-mkdir -p data/tmp
-
-### just making a test
-
-
-/mnt/HDD2/colin/bin/sratoolkit.2.10.4-ubuntu64/bin/fasterq-dump \
-SRR10572657 \
--e 32 \
--o data/sra \
--t data/tmp
-
-### get the ensembl CHOK1 genome and GTF
+### Download the data from ENA
+This is a simple way to dowload from ENA, for higher speed download use the
+Aspera client
 ```bash
-./scripts/prepare_genome.sh -v 98 -o reference_genome
-```
-#make the STAR index
-
-```bash
-./scripts/make_star_index.sh -g reference_genome/ensembl_chok1_genome.fa -a reference_genome/ensembl_chok1_genome.gtf -p 32 -d reference_genome
+mkdir -p data/ena
+wget -q "ftp://ftp.sra.ebi.ac.uk/ena/vol1/fastq/SRR105/057/SRR10572657/*" -P data/ena || { handle ; error ; }&
+wget -q "ftp://ftp.sra.ebi.ac.uk/ena/vol1/fastq/SRR105/058/SRR10572658/*" -P data/ena || { handle ; error ; }&
+wget -q "ftp://ftp.sra.ebi.ac.uk/ena/vol1/fastq/SRR105/059/SRR10572659/*" -P data/ena || { handle ; error ; }&
+wget -q "ftp://ftp.sra.ebi.ac.uk/ena/vol1/fastq/SRR105/060/SRR10572660/*" -P data/ena || { handle ; error ; }&
+wget -q "ftp://ftp.sra.ebi.ac.uk/ena/vol1/fastq/SRR105/061/SRR10572661/*" -P data/ena || { handle ; error ; }&
+wget -q "ftp://ftp.sra.ebi.ac.uk/ena/vol1/fastq/SRR105/062/SRR10572662/*" -P data/ena || { handle ; error ; }&
+wget -q "ftp://ftp.sra.ebi.ac.uk/ena/vol1/fastq/SRR105/063/SRR10572663/*" -P data/ena || { handle ; error ; }&
+wget -q "ftp://ftp.sra.ebi.ac.uk/ena/vol1/fastq/SRR105/064/SRR10572664/*" -P data/ena || { handle ; error ; }
 ```
 
 ### create a list of sample sample_names
@@ -54,10 +52,23 @@ cat data/sample_names.txt | while read sample; do
 done
 ```
 
+## Mapping the RNAseq data
+### Download the reference genome and NCBI annotation for CHO K1
+. The sequence is also prepped for further analysis by retaining only the scaffold ID.
+In addition, a complementay annotation file is created from NCBI to help with annotation later
+```bash
+./scripts/prepare_genome.sh -v 98 -o reference_genome
+```
+### make the STAR index
+Use the reference genome to build an index for mapping the RNASeq reads
+```bash
+./scripts/make_star_index.sh -g reference_genome/ensembl_chok1_genome.fa -a reference_genome/ensembl_chok1_genome.gtf -p 32 -d reference_genome
+```
+
 ### map to CHOK1 genome
 ```bash
 cat data/sample_names.txt | while read sample; do
-./scripts/star_mapping.sh -s $sa mple -i ../data/preprocessed/paired -g reference_genome/star_index -o mapped -p 32
+./scripts/star_mapping.sh -s $sample -i ../data/preprocessed/paired -g reference_genome/star_index -o mapped -p 32
 done
 ```
 
