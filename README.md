@@ -16,6 +16,9 @@ Samtools
 mkdir -p data/sra
 mkdir -p data/tmp
 
+### just making a test
+
+
 /mnt/HDD2/colin/bin/sratoolkit.2.10.4-ubuntu64/bin/fasterq-dump \
 SRR10572657 \
 -e 32 \
