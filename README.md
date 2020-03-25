@@ -1,43 +1,56 @@
 # CHO cell alternative splicing analysis
-## Introduction, just chaning
-These scripts  enable the reproduction of the results of
 
-Tzani et al. Sub physiological temperature induces pervasive alternative splicing in Chinese hamster ovary cells
+## Introduction
+---
+This respository enables the reproduction of the analysis described in: 
 
-The experimental design is as follows:
+Tzani *et al.* **Sub physiological temperature induces pervasive alternative splicing in Chinese hamster ovary cells** 
+bioRxiv 2019 [https://doi.org/10.1101/863175](https://doi.org/10.1101/863175)
 
-Data availability:
+### Data availability:
+NIBI SRA:  
+ENA:
 
 ### Dependancies
 All the programmes must be added to the PATH to run the workflow
-
-Trimmomatic 0.36
-Cutadpat 1.18
-STAR-2.7.2d
-DESeq2_1.22.2
-biomaRt_2.38.0
-rMats.3.5.2
-rmats2sashimiplot
-stringtie 2.0.3
-Samtools 1.6
-Python 2.7.12
-R 3.5.2
-
+- Trimmomatic 0.36 ()
+- Cutadpat 1.18 ()
+- STAR-2.7.2d ()
+- DESeq2_1.22.2 ()
+- biomaRt_2.38.0
+- rMats.3.5.2
+- rmats2sashimiplot
+- stringtie 2.0.3
+- Samtools 1.6
+- Python 2.7.12
+- R 3.5.2
+    - dpylr
+    - DESeq2
+    - xlxs
+    - stringr
+    - biomartR
 
 ## RNASeq data preprocesssing
+---
 ### Download the data from ENA
-This is a simple way to dowload from ENA, for higher speed download use the
-Aspera client
-Total data download size: ~95G
+This is a simple way to dowload from ENA, for higher speed download use the Aspera client
+Total data download size: **~95G** 
 ```bash
 mkdir -p data/ena
-wget -q "ftp://ftp.sra.ebi.ac.uk/ena/vol1/fastq/SRR105/057/SRR10572657/*" -P data/ena || { handle ; error ; }&
-wget -q "ftp://ftp.sra.ebi.ac.uk/ena/vol1/fastq/SRR105/058/SRR10572658/*" -P data/ena || { handle ; error ; }&
-wget -q "ftp://ftp.sra.ebi.ac.uk/ena/vol1/fastq/SRR105/059/SRR10572659/*" -P data/ena || { handle ; error ; }&
-wget -q "ftp://ftp.sra.ebi.ac.uk/ena/vol1/fastq/SRR105/060/SRR10572660/*" -P data/ena || { handle ; error ; }&
-wget -q "ftp://ftp.sra.ebi.ac.uk/ena/vol1/fastq/SRR105/061/SRR10572661/*" -P data/ena || { handle ; error ; }&
-wget -q "ftp://ftp.sra.ebi.ac.uk/ena/vol1/fastq/SRR105/062/SRR10572662/*" -P data/ena || { handle ; error ; }&
-wget -q "ftp://ftp.sra.ebi.ac.uk/ena/vol1/fastq/SRR105/063/SRR10572663/*" -P data/ena || { handle ; error ; }&
+wget -q "ftp://ftp.sra.ebi.ac.uk/ena/vol1/fastq/SRR105/057/SRR10572657/*" -P data/ena || { handle ; error ; }
+
+wget -q "ftp://ftp.sra.ebi.ac.uk/ena/vol1/fastq/SRR105/058/SRR10572658/*" -P data/ena || { handle ; error ; }
+
+wget -q "ftp://ftp.sra.ebi.ac.uk/ena/vol1/fastq/SRR105/059/SRR10572659/*" -P data/ena || { handle ; error ; }
+
+wget -q "ftp://ftp.sra.ebi.ac.uk/ena/vol1/fastq/SRR105/060/SRR10572660/*" -P data/ena || { handle ; error ; }
+
+wget -q "ftp://ftp.sra.ebi.ac.uk/ena/vol1/fastq/SRR105/061/SRR10572661/*" -P data/ena || { handle ; error ; }
+
+wget -q "ftp://ftp.sra.ebi.ac.uk/ena/vol1/fastq/SRR105/062/SRR10572662/*" -P data/ena || { handle ; error ; }
+
+wget -q "ftp://ftp.sra.ebi.ac.uk/ena/vol1/fastq/SRR105/063/SRR10572663/*" -P data/ena || { handle ; error ; }
+
 wget -q "ftp://ftp.sra.ebi.ac.uk/ena/vol1/fastq/SRR105/064/SRR10572664/*" -P data/ena || { handle ; error ; }
 ```
 ### trim adapter sequences
