@@ -1,4 +1,8 @@
 #!/usr/bin/env bash
+#### Trim adapter sequences using cutadapt
+#### inputs are: 1) sample ID and 2) the data directory & output directory
+#### Written by NIBRT: colin.clarke@nibrt.ie 12-2019
+
 if (($# == 0)); then
         echo "Usage:"
         echo "-s = sample ID"
@@ -6,20 +10,26 @@ if (($# == 0)); then
         echo "-o = output directory"
         exit 2
 fi
+
 while getopts s:i:o: option
   do
     case "${option}"
       in
-      s) SAMPLEID=${OPTARG};;
-      i) INDIR=${OPTARG};;
-      o) OUTDIR=${OPTARG};;
+      s) SAMPLE_ID=${OPTARG};;
+      i) IN_DIR=${OPTARG};;
+      o) OUT_DIR=${OPTARG};;
     esac
 done
 
 # trim adapter using cutadapt
+# Following https://cutadapt.readthedocs.io/en/stable/guide.html
+# Using the longer adapter sequences recommended by this document
+
 cutadapt  \
--A AGATCGGAAGAGC  -a AGATCGGAAGAGC \
-          -o $OUTDIR/"$SAMPLEID"_R1.fastq.gz -p $OUTDIR/"$SAMPLEID"_R2.fastq.gz \
-          $INDIR/"$SAMPLEID"_R1.fastq.gz $INDIR/"$SAMPLEID"_R2.fastq.gz
+-A AGATCGGAAGAGCACACGTCTGAACTCCAGTCA \
+-a AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGTA \
+-o $OUT_DIR/"$SAMPLE_ID"_1.fastq.gz \
+-p $OUT_DIR/"$SAMPLE_ID"_2.fastq.gz \
+   $IN_DIR/"$SAMPLE_ID"_1.fastq.gz $IN_DIR/"$SAMPLE_ID"_2.fastq.gz
 
 # END

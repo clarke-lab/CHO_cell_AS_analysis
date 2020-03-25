@@ -10,8 +10,6 @@ grep -v -wFf manuscript_plots/de_gene.list rmats/filtered/SE_filtered_annotated.
 | grep -v 'lincRNA' \
 | awk -F, '{print $5}' |  sort | uniq > manuscript_plots/upset_plot/SE_splice_only.list
 
-
-
 awk -F, '{print $5}'  rmats/filtered/SE_filtered_annotated.csv | sort | uniq > manuscript_plots/upset_plot/SE_only.list
 
 grep -v -wFf manuscript_plots/de_gene.list rmats/filtered/MXE_filtered_annotated.csv \

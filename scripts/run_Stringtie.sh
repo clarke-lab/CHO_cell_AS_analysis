@@ -21,10 +21,6 @@ while getopts s:i:p:g:o: option
     esac
 done
 
-if [ ! -d $OUTDIR ]; then
-mkdir -p $OUTDIR
-fi
-
 if [ ! -d $OUTDIR/individual_gtfs ]; then
 mkdir -p $OUTDIR/individual_gtfs
 fi

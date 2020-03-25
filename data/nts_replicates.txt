@@ -1,0 +1,1 @@
+data/rmats/trimmed/SRR10572660_1.fastq:data/rmats/trimmed/SRR10572660_2.fastq,data/rmats/trimmed/SRR10572659_1.fastq:data/rmats/trimmed/SRR10572659_2.fastq,data/rmats/trimmed/SRR10572658_1.fastq:data/rmats/trimmed/SRR10572658_2.fastq,data/rmats/trimmed/SRR10572657_1.fastq:data/rmats/trimmed/SRR10572657_2.fastq

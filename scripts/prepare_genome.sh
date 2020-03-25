@@ -13,8 +13,6 @@ while getopts v:o: option
     esac
 done
 
-mkdir -p $GENOME_DIR
-
 # get the ENSEMBL CHOK1 reference genome and GTF file
 wget ftp://ftp.ensembl.org/pub/release-$ENSEMBL_VER/fasta/cricetulus_griseus_crigri/dna/Cricetulus_griseus_crigri.CriGri_1.0.dna.toplevel.fa.gz \
 -P $GENOME_DIR
@@ -38,7 +36,7 @@ gunzip $GENOME_DIR/*.gz
 grep '^\<10029\>' $GENOME_DIR/gene_info > $GENOME_DIR/chok1_ncbi_ids.txt
 rm $GENOME_DIR/gene_info
 #list on ensembl protein coding genes
-#grep 'protein_coding' $GENOMEDIR/$name.gtf | awk {'print $10'} | uniq | tr -d \" | tr -d \; > $GENOMEDIR/protein.coding.genes.list
+grep 'protein_coding' $GENOMEDIR/$name.gtf | awk {'print $10'} | uniq | tr -d \" | tr -d \; > $GENOMEDIR/protein.coding.genes.list
 
 
 #list of ensembl other ncRNAs

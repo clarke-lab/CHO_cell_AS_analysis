@@ -1,18 +1,40 @@
 #!/usr/bin/Rscript
+## -----------------------------------------------------------------------------
+##
+## Script name: coverage_filt.R
+##
+## Purpose of script: To filter the output of rMats by the number of reads
+## spanning each junction
+##
+## Author: NIBRT
+##
+## Date Created: Dec-2020
+##
+## Email: colin.clarke@nibrt.ie
+##
+## -----------------------------------------------------------------------------
+##
+## Info: Called from the filter_rmats_results.R script
+##
+## -----------------------------------------------------------------------------
 
 # filteres rMats AS events with mean junction coverage < 10
-coverage_filt<-function(rmats_data_frame){
-  merged_counts<-paste(rmats_data_frame$IJC_SAMPLE_1,
-                       rmats_data_frame$SJC_SAMPLE_1,
-                       rmats_data_frame$IJC_SAMPLE_2,
-                       rmats_data_frame$SJC_SAMPLE_2,
-                       sep=",")
-  counts <- as.matrix(cbind(data.frame(do.call('rbind',
-  strsplit(as.character(merged_counts),',',fixed=TRUE)))))
+coverage_filt <- function(rmats_data_frame) {
+  merged_counts <- paste(rmats_data_frame$IJC_SAMPLE_1,
+    rmats_data_frame$SJC_SAMPLE_1,
+    rmats_data_frame$IJC_SAMPLE_2,
+    rmats_data_frame$SJC_SAMPLE_2,
+    sep = ","
+  )
 
-  class(counts)<-"numeric"
-  rownames(counts)<-rownames(rmats_data_frame)
-  selected_IDs<-rownames(counts[rowMeans(counts) >= 10,])
-  rmats_data_frame<-rmats_data_frame[selected_IDs,]
+  counts <- as.matrix(cbind(data.frame(do.call(
+    "rbind",
+    strsplit(as.character(merged_counts), ",", fixed = TRUE)
+  ))))
+
+  class(counts) <- "numeric"
+  rownames(counts) <- rownames(rmats_data_frame)
+  selected_IDs <- rownames(counts[rowMeans(counts) >= 10, ])
+  rmats_data_frame <- rmats_data_frame[selected_IDs, ]
   return(rmats_data_frame)
 }

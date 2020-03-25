@@ -1,4 +1,7 @@
-data
+data/ena
+data/cutadapt
+data/preprocessed
+data/mapped
 differential_expression
 reference_genome
 rmats
@@ -6,3 +9,15 @@ stringtie
 manuscript_plots/sashimi_plots
 manuscript_plots/read_counts
 manuscript_plots/rnaseqc
+.gitignore
+*sublime-*
+R/.*
+R/R.*
+.Rhistory
+paper_checks
+.Rproj.user
+Log.out
+transcriptome_assembly
+AS_results
+DE_results
+rMats_output/*
