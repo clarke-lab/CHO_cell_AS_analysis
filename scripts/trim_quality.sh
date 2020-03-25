@@ -1,32 +1,37 @@
 #!/usr/bin/env bash
+#### Trim low quality bases using trimmomatic
+#### inputs are: 1) sample ID and 2) the data directory 3) output directory
+#### & 4) number of threads
+#### Written by NIBRT: colin.clarke@nibrt.ie 12-2019
 if (($# == 0)); then
         echo "Usage:"
         echo "-s = sample ID"
         echo "-i = input directory"
         echo "-o = output directory"
+        echo "-p = num threads"
         exit 2
 fi
-while getopts s:i:o: option
+
+while getopts s:i:o:p: option
   do
     case "${option}"
       in
-      s) SAMPLEID=${OPTARG};;
-      i) INDIR=${OPTARG};;
-      o) OUTDIR=${OPTARG};;
+      s) SAMPLE_ID=${OPTARG};;
+      i) IN_DIR=${OPTARG};;
+      o) OUT_DIR=${OPTARG};;
+      p) NUM_THREADS=${OPTARG};;
     esac
 done
 
-mkdir -p $OUTDIR
-mkdir -p $OUTDIR/paired $OUTDIR/unpaired
+mkdir -p $OUT_DIR
+mkdir -p $OUT_DIR/paired $OUT_DIR/unpaired
 
-# quality preprocessing; minimum read length = 36nt
-java -jar ~/bin/Trimmomatic-0.36/trimmomatic-0.36.jar PE \
-                     -threads 32 \
-                     $INDIR/"$SAMPLEID"_R1.fastq.gz $INDIR/"$SAMPLEID"_R2.fastq.gz \
-                     $OUTDIR/paired/"$SAMPLEID"_R1.fastq.gz $OUTDIR/unpaired/"$SAMPLEID"_R1.fastq.gz \
-                     $OUTDIR/paired/"$SAMPLEID"_R2.fastq.gz $OUTDIR/unpaired/"$SAMPLEID"_R2.fastq.gz \
-                     SLIDINGWINDOW:4:20 \
-                     MINLEN:36 \
-                     -trimlog $OUTDIR/"$SAMPLEID".trimmomatic.log
-
+java -jar  trimmomatic-0.36.jar PE \
+     -threads $NUM_THREADS \
+     $IN_DIR/"$SAMPLE_ID"_1.fastq.gz $IN_DIR/"$SAMPLE_ID"_2.fastq.gz \
+     $OUT_DIR/paired/"$SAMPLE_ID"_1.fastq.gz $OUT_DIR/unpaired/"$SAMPLE_ID"_1.fastq.gz \
+     $OUT_DIR/paired/"$SAMPLE_ID"_2.fastq.gz $OUT_DIR/unpaired/"$SAMPLE_ID"_2.fastq.gz \
+     SLIDINGWINDOW:4:20 \
+     MINLEN:36 \
+     -trimlog $OUT_DIR/"$SAMPLE_ID".trimmomatic.log
 # END
