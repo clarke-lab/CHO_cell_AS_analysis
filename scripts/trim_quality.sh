@@ -3,7 +3,6 @@
 #### inputs are: 1) sample ID and 2) the data directory 3) output directory
 #### & 4) number of threads
 #### Written by NIBRT: colin.clarke@nibrt.ie 12-2019
-
 if (($# == 0)); then
         echo "Usage:"
         echo "-s = sample ID"
@@ -27,10 +26,7 @@ done
 mkdir -p $OUT_DIR
 mkdir -p $OUT_DIR/paired $OUT_DIR/unpaired
 
-echo $NUM_THREADS
-# quality preprocessing; minimum read length = 36nt
-echo $IN_DIR/"$SAMPLE_ID"_1.fastq.gz
-java -jar ~/bin/Trimmomatic-0.36/trimmomatic-0.36.jar PE \
+java -jar  trimmomatic-0.36.jar PE \
      -threads $NUM_THREADS \
      $IN_DIR/"$SAMPLE_ID"_1.fastq.gz $IN_DIR/"$SAMPLE_ID"_2.fastq.gz \
      $OUT_DIR/paired/"$SAMPLE_ID"_1.fastq.gz $OUT_DIR/unpaired/"$SAMPLE_ID"_1.fastq.gz \

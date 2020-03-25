@@ -9,15 +9,21 @@ The experimental design is as follows:
 Data availability:
 
 ### Dependancies
-Trimmomatic 0.36 [modify the code to add to path]
-Cutadpat
+All the programmes must be added to the PATH to run the workflow
+
+Trimmomatic 0.36
+Cutadpat 1.18
 STAR-2.7.2d
-R 3.5
 DESeq2_1.22.2
 biomaRt_2.38.0
 rMats.3.5.2
-stringtie
-Samtools
+rmats2sashimiplot
+stringtie 2.0.3
+Samtools 1.6
+Python 2.7.12
+R 3.5.2
+
+
 ## RNASeq data preprocesssing
 ### Download the data from ENA
 This is a simple way to dowload from ENA, for higher speed download use the
@@ -34,16 +40,12 @@ wget -q "ftp://ftp.sra.ebi.ac.uk/ena/vol1/fastq/SRR105/062/SRR10572662/*" -P dat
 wget -q "ftp://ftp.sra.ebi.ac.uk/ena/vol1/fastq/SRR105/063/SRR10572663/*" -P data/ena || { handle ; error ; }&
 wget -q "ftp://ftp.sra.ebi.ac.uk/ena/vol1/fastq/SRR105/064/SRR10572664/*" -P data/ena || { handle ; error ; }
 ```
-### create a list of sample sample_names
-```bash
-ls ../data/raw/ | sed -n 's/\.fastq.gz$//p' | cut -d_ -f1-2 | uniq > data/sample_names.txt
-```
 ### trim adapter sequences
 Adapter trimming for the Illumina TruSeq adapters
 ```bash
 mkdir data/cutadapt
 cat data/sample_info.txt | cut -f 2 | tail -n 8 | while read sample; do
-./scripts/trim_adapter.sh -s $sample  -i data/ena -o data/cutadapt&
+./scripts/trim_adapter.sh -s $sample  -i data/ena -o data/cutadapt
 done
 ```
 ### quality trimming
@@ -66,7 +68,7 @@ mkdir reference_genome
 ### make the STAR index
 Use the reference genome to build an index for mapping the RNASeq reads
 ```bash
-./scripts/make_star_index.sh -g reference_genome/ensembl_chok1_genome.fa -a reference_genome/ensembl_chok1_genome.gtf -p 32 -d reference_genome&
+./scripts/make_star_index.sh -g reference_genome/ensembl_chok1_genome.fa -a reference_genome/ensembl_chok1_genome.gtf -p 32 -d reference_genome
 ```
 
 ### map to CHOK1 genome
@@ -82,13 +84,13 @@ done
 ```bash
 mkdir transcriptome_assembly
 cat data/sample_info.txt | cut -f 2 | tail -n 8 | while read sample; do
-  ./scripts/run_Stringtie.sh -s $sample -i data/mapped -g reference_genome/ensembl_chok1_genome.gtf -o transcriptome_assembly -p 32
+  ./scripts/run_stringtie.sh -s $sample -i data/mapped -g reference_genome/ensembl_chok1_genome.gtf -o transcriptome_assembly -p 32
 done
 ```
 
 ### merge individual stringtie assemblies and compare to ENSEMBL annotation
 ```bash
-./scripts/stringtie_merge.sh -t transcriptome_assembly -g reference_genome/ensembl_chok1_genome.gtf
+./scripts/stringtie_merge.sh -t transcriptome_assembly -g reference_genome/ensembl_chok1_genome.gtf -r reference_genome
 ```
 
 ## Differential gene expression analysis
@@ -130,7 +132,7 @@ python2 ~/bin/rMATS.4.0.2/rMATS-turbo-Linux-UCS4/rmats.py \
 
 ### filter and annotate the rmats results
 ```bash
-Rscript R/filter_rmats_results_v1.R "rMats_output" "AS_results"
+Rscript R/process_rmats.R "rMats_output" "AS_results"
 ```
 ### Sashimi plot example
 
@@ -140,7 +142,7 @@ output_dir="AS_results/sashimi_plots"
 mkdir $output_dir
 
 # make a grouping file
-touch $output_dir/grouping.gf 
+touch $output_dir/grouping.gf
 echo  "NTS: 1-4" >> $output_dir/grouping.gf
 echo  "TS: 5-8" >> $output_dir/grouping.gf
 

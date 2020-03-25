@@ -26,7 +26,7 @@ while getopts s:i:p:g:o: option
 done
 
 
-/mnt/HDD2/colin/bin/STAR-2.7.2d/bin/Linux_x86_64/STAR \
+STAR \
 --runThreadN $THREADS \
 --readFilesIn $INDIR/"$SAMPLEID"_1.fastq.gz $INDIR/"$SAMPLEID"_2.fastq.gz \
 --genomeDir $INDEX \
@@ -39,3 +39,5 @@ done
 
 # create a BAM index
 samtools index $OUTDIR/"$SAMPLEID"Aligned.sortedByCoord.out.bam
+
+# END

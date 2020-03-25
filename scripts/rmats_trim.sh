@@ -42,3 +42,5 @@ python ~/bin/rMATS.3.2.5/bin/trimFastq.py  \
 $OUT_DIR/untrimmed/"$SAMPLE_ID"_2.fastq \
 $OUT_DIR/trimmed/"$SAMPLE_ID"_2.fastq 125
 rm $OUT_DIR/untrimmed/"$SAMPLE_ID"_2.fastq
+
+# END

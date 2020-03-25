@@ -1,9 +1,9 @@
 #!/usr/bin/Rscript
 ## -----------------------------------------------------------------------------
 ##
-## Script name: add_annotation.R
+## Script name: process_rmats.R
 ##
-## Purpose of script: To filter the output from the rMats algorithm and annotate the results
+## Purpose of script: Filter the output from the rMats algorithm and annotate the results
 ##
 ## Author: NIBRT
 ##
@@ -66,10 +66,10 @@ filter_rmats_results <- function(rmats_dir, event_type) {
 
   # retain events with 10 or more reads spanning the included and skipped junctions
   coverage_filtered <- coverage_filter(unfiltered)
-  
+
   # keep all the events that have sufficent cover whether significant or not
   save(coverage_filtered, file=paste(rmats_dir,"/",event_type,".rData",sep=""))
-  
+
   # retain events with an rMats FDR < 0.05 & a change in the PSI of 10%
   filtered <- coverage_filtered %>%
     filter(FDR < 0.05) %>%

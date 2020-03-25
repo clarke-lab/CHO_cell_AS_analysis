@@ -24,7 +24,6 @@ done
 # trim adapter using cutadapt
 # Following https://cutadapt.readthedocs.io/en/stable/guide.html
 # Using the longer adapter sequences recommended by this document
-
 cutadapt  \
 -A AGATCGGAAGAGCACACGTCTGAACTCCAGTCA \
 -a AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGTA \

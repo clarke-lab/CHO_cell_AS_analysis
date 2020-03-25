@@ -1,9 +1,8 @@
 #!/usr/bin/env bash
-#### get the chinese hamster reference genome from ENSEMBL
-#### get additional annotations from NCBI
-#### inputs are: 1) output directory and 2) ensembl version
+#### count reads aligned to reference genome for differential expression
+#### inputs are: 1) sample ID and 2) bam input directory 2) reference GTF
+#### 4) output directory
 #### Written by NIBRT: colin.clarke@nibrt.ie 12-2019
-
 if (($# == 0)); then
         echo "Usage:"
         echo "-s = sample ID"
@@ -26,4 +25,5 @@ done
 mkdir -p $OUT_DIR/counts
 echo $SAMPLE_ID
 htseq-count -r pos -f bam -i gene_id -s reverse $MAP_DIR/"$SAMPLE_ID"Aligned.sortedByCoord.out.bam $REF_GTF > "$OUT_DIR"/counts/"$SAMPLE_ID".counts
+
 # END

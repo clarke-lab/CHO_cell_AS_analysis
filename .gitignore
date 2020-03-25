@@ -9,8 +9,8 @@ stringtie
 manuscript_plots/sashimi_plots
 manuscript_plots/read_counts
 manuscript_plots/rnaseqc
+manuscript_plots/*
 .gitignore
-*sublime-*
 R/.*
 R/R.*
 .Rhistory
