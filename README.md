@@ -13,14 +13,14 @@ ENA:
 
 ### Dependancies
 All the programmes must be added to the PATH to run the workflow
-- [Python 2.7.12] (https://www.python.org/download/releases/2.7/)
-- [trimmomatic 0.36] (http://www.usadellab.org/cms/?page=trimmomatic) 
-- [cutadpat 1.18] (https://cutadapt.readthedocs.io/en/stable/)
-- [STAR-2.7.2d] (https://github.com/alexdobin/STAR)
-- [rMats.4.0.2] (http://rnaseq-mats.sourceforge.net)
-- [rmats2sashimiplot] (https://github.com/Xinglab/rmats2sashimiplot)
-- [stringtie 2.0.3] (http://ccb.jhu.edu/software/stringtie/index.shtml)
-- [samtools 1.6] (http://www.htslib.org)
+- [Python 2.7.12](https://www.python.org/download/releases/2.7/)
+- [trimmomatic 0.36](http://www.usadellab.org/cms/?page=trimmomatic) 
+- [cutadpat 1.18](https://cutadapt.readthedocs.io/en/stable/)
+- [STAR-2.7.2d](https://github.com/alexdobin/STAR)
+- [rMats.4.0.2](http://rnaseq-mats.sourceforge.net)
+- [rmats2sashimiplot](https://github.com/Xinglab/rmats2sashimiplot)
+- [stringtie 2.0.3](http://ccb.jhu.edu/software/stringtie/index.shtml)
+- [samtools 1.6](http://www.htslib.org)
 
 - R 3.5.2
     - [dpylr 0.8.4] (https://dplyr.tidyverse.org) 
