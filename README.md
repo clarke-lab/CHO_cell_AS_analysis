@@ -13,22 +13,21 @@ ENA:
 
 ### Dependancies
 All the programmes must be added to the PATH to run the workflow
-- Trimmomatic 0.36 ()
-- Cutadpat 1.18 ()
-- STAR-2.7.2d ()
-- DESeq2_1.22.2 ()
-- biomaRt_2.38.0
-- rMats.3.5.2
-- rmats2sashimiplot
-- stringtie 2.0.3
-- Samtools 1.6
-- Python 2.7.12
+- [Python 2.7.12] (https://www.python.org/download/releases/2.7/)
+- [trimmomatic 0.36] (http://www.usadellab.org/cms/?page=trimmomatic) 
+- [cutadpat 1.18] (https://cutadapt.readthedocs.io/en/stable/)
+- [STAR-2.7.2d] (https://github.com/alexdobin/STAR)
+- [rMats.4.0.2] (http://rnaseq-mats.sourceforge.net)
+- [rmats2sashimiplot] (https://github.com/Xinglab/rmats2sashimiplot)
+- [stringtie 2.0.3] (http://ccb.jhu.edu/software/stringtie/index.shtml)
+- [samtools 1.6] (http://www.htslib.org)
+
 - R 3.5.2
-    - dpylr
-    - DESeq2
-    - xlxs
-    - stringr
-    - biomartR
+    - [dpylr 0.8.4] (https://dplyr.tidyverse.org) 
+    - [DESeq2 1.22.0] https://bioconductor.org/packages/release/bioc/html/DESeq2.html)
+    - [xlxs 0.6.2] (https://cran.r-project.org/web/packages/xlsx/index.html)
+    - [stringr 1.4.0] (https://stringr.tidyverse.org)
+    - [biomaRt 2.38.0] (https://bioconductor.org/packages/release/bioc/html/biomaRt.html)
 
 ## RNASeq data preprocesssing
 ---
