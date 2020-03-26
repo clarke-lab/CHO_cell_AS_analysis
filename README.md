@@ -24,7 +24,7 @@ All the programmes must be added to the PATH to run the workflow
 
 - R 3.5.2
     - [dpylr 0.8.4](https://dplyr.tidyverse.org) 
-    - [DESeq2 1.22.0]https://bioconductor.org/packages/release/bioc/html/DESeq2.html)
+    - [DESeq2 1.22.0](https://bioconductor.org/packages/release/bioc/html/DESeq2.html)
     - [xlxs 0.6.2](https://cran.r-project.org/web/packages/xlsx/index.html)
     - [stringr 1.4.0](https://stringr.tidyverse.org)
     - [biomaRt 2.38.0](https://bioconductor.org/packages/release/bioc/html/biomaRt.html)
