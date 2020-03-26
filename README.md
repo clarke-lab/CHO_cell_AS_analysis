@@ -155,7 +155,7 @@ mkdir $output_dir
 
 # make a grouping file
 touch $output_dir/grouping.gf
-echo  "NTS: 1-4" >> $output_dir/grouping.gf
+echo  "NTS: 1-4" > $output_dir/grouping.gf
 echo  "TS: 5-8" >> $output_dir/grouping.gf
 
 # specific the bam files to make the plot
