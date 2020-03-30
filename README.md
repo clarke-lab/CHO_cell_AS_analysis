@@ -130,7 +130,6 @@ done
 
 ### rMAT analysis
 ```bash
-mkdir AS_results/unfiltered
 python2 ~/bin/rMATS.4.0.2/rMATS-turbo-Linux-UCS4/rmats.py \
 --s1 data/ts_replicates.txt \
 --s2 data/nts_replicates.txt \
@@ -144,6 +143,7 @@ python2 ~/bin/rMATS.4.0.2/rMATS-turbo-Linux-UCS4/rmats.py \
 
 ### filter and annotate the rmats results
 ```bash
+mkdir AS_results
 Rscript R/process_rmats.R "rMats_output" "AS_results"
 ```
 ### Sashimi plot example
