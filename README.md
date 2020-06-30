@@ -5,10 +5,10 @@
 This respository enables the reproduction of the analysis described in: 
 
 Tzani *et al.* **Sub physiological temperature induces pervasive alternative splicing in Chinese hamster ovary cells**
-*bioRxiv 2019* [https://doi.org/10.1101/863175](https://doi.org/10.1101/863175)
+*Biotechnology and Bioengineering 2020* [https://doi.org/10.1002/bit.27365]( https://doi.org/10.1002/bit.27365)
 
 ### Data availability:
-[NIBI Sequence Read Archive](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA593052/)  
+[NCBI Sequence Read Archive](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA593052/)  
 [European Nucleotide Archive](https://www.ebi.ac.uk/ena/browser/view/PRJNA593052)
 
 ### Dependancies
