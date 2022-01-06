@@ -1,3 +1,5 @@
+[![DOI](https://zenodo.org/badge/225317346.svg)](https://zenodo.org/badge/latestdoi/225317346)
+
 # CHO cell alternative splicing analysis
 
 ## Introduction
